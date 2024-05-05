@@ -14,7 +14,7 @@ function BotsPage() {
     .then(res => {
       setBots(res.data)
     })
-    .catch(err => console.log(err))
+    .catch(error => console.error('Eror fetching bots', error));
   }, []);
 
   const enlistBot = (bot) => {
@@ -23,12 +23,22 @@ function BotsPage() {
     };
   };
 
+  const dischargeBot = (botId) => {
+    console.log(botId);
+    axios.delete(`http://localhost:8002/bots/${botId}`)
+    .then (()=> {
+      setBots(bots.filter(bot => bot.id !== botId));
+      setArmy(army.filter(bot => bot.id !== botId));
+    })
+    .catch(error => console.error('Error deleting bot', error));
+  }; 
+
 
 
   return (
     <div>
-      <YourBotArmy army={army} />
-      <BotCollection bots={bots} enlistBot={enlistBot} />
+      <YourBotArmy army={army} handleDischarge={dischargeBot} />
+      <BotCollection bots={bots} dischargeBot={dischargeBot} enlistBot={enlistBot} />
     </div>
   )
 }
