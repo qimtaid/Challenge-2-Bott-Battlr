@@ -1,13 +1,13 @@
 import React from "react";
 
-function YourBotArmy() {
+function YourBotArmy({army}) {
   //your bot army code here...
 
   return (
     <div className="ui segment inverted olive bot-army">
       <div className="ui five column grid">
         <div className="row bot-army-row">
-          {/*...and here...*/}
+          {army}
           Your Bot Army
         </div>
       </div>
